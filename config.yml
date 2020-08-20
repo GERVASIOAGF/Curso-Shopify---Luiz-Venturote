@@ -1,8 +1,4 @@
 development:
   password: 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
-  theme_id: "108194136217"
-  store: maui-86.myshopify.com
-production:
-  password: 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
-  theme_id: "108194136217"
+  theme_id: "108193808537"
   store: maui-86.myshopify.com

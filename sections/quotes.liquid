@@ -1,35 +1,33 @@
-<div class="page-width">
-  <div class="section-block section-block--padding">
-    {% if section.settings.title != blank %}
-      <div class="section-block__header text-center">
-        <h4 class="h1--mini section-block__title">{{ section.settings.title | escape }}</h4>
-      </div>
-    {% endif %}
+<div class="page-width" data-section-id="{{ section.id }}" data-section-type="quotes">
+  {% if section.settings.title != blank %}
+    <div class="section-header text-center">
+      <h2>{{ section.settings.title | escape }}</h2>
+    </div>
+  {% endif %}
 
-    {% if section.blocks.size > 0 %}
-      <div class="quotes-wrapper">
-        <div class="quotes-slider" id="Quotes-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="quotes">
-          {% for block in section.blocks %}
-            <div class="quote__slide-wrapper quote__slide-wrapper--{{ block.id }}" {{ block.shopify_attributes }}>
-              <div class="quote__slide text-center">
-                <div class="page-width">
-                  <blockquote>
-                    <span class="quote-icon">{% include 'icon-quote' %}</span>
-                    <div class="rte-setting">{{ block.settings.quote }}</div>
-                    <cite>{{ block.settings.author | escape }}</cite>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
+  {% if section.blocks.size > 0 %}
+    <div class="quotes-wrapper">
+      <div class="quotes-slider" id="Quotes-{{ section.id }}" data-count="{{ section.blocks.size }}">
+        {% for block in section.blocks %}
+          <div class="quotes-slide--{{ block.id }}" {{ block.shopify_attributes }}>
+            <blockquote class="quotes-slider__text text-center">
+              <span class="quote-icon">{% include 'icon-quote' %}</span>
+              {% if block.settings.quote != blank %}
+                <div class="rte-setting rte">{{ block.settings.quote }}</div>
+              {% endif %}
+              {% if block.settings.author != blank %}
+                <cite>{{ block.settings.author | escape }}</cite>
+              {% endif %}
+            </blockquote>
+          </div>
+        {% endfor %}
       </div>
-    {% endif %}
+    </div>
+  {% endif %}
 
-    {% if section.blocks.size == 0 %}
-      {% include 'no-blocks' %}
-    {% endif %}
-  </div>
+  {% if section.blocks.size == 0 %}
+    {% include 'no-blocks' %}
+  {% endif %}
 </div>
 
 
@@ -57,7 +55,7 @@
     "zh-TW": "推薦文"
   },
   "class": "index-section",
-  "max_blocks": 5,
+  "max_blocks": 9,
   "settings": [
     {
       "type": "text",
@@ -68,7 +66,7 @@
         "en": "Heading",
         "es": "Título",
         "fi": "Otsake",
-        "fr": "Titre",
+        "fr": "En-tête",
         "hi": "शीर्षक",
         "it": "Heading",
         "ja": "見出し",
@@ -108,24 +106,24 @@
     {
       "type": "quote",
       "name": {
-        "da": "Citer",
-        "de": "Zitat",
-        "en": "Quote",
-        "es": "Cotización",
-        "fi": "Lainaus",
-        "fr": "Citation",
-        "hi": "उद्धरण",
-        "it": "Citazione",
-        "ja": "引用",
-        "ko": "따옴표",
-        "nb": "Pristilbud",
-        "nl": "Offerte",
-        "pt-BR": "Citação",
-        "pt-PT": "Citação",
-        "sv": "Citat",
-        "th": "อ้างอิงคำพูด",
-        "zh-CN": "报价",
-        "zh-TW": "引用"
+        "da": "Udtalelse",
+        "de": "Testimonial",
+        "en": "Testimonial",
+        "es": "Testimonio",
+        "fi": "Suositukset",
+        "fr": "Témoignages",
+        "hi": "प्रमाणपत्र",
+        "it": "Testimonial",
+        "ja": "お客様の声",
+        "ko": "추천",
+        "nb": "Anbefaling",
+        "nl": "Testimonial",
+        "pt-BR": "Depoimento",
+        "pt-PT": "Testemunho",
+        "sv": "Kundberättelser",
+        "th": "เสียงชื่นชมจากลูกค้า",
+        "zh-CN": "感言",
+        "zh-TW": "推薦文"
       },
       "settings": [
         {
@@ -169,7 +167,7 @@
             "sv": "<p>Lägg till kundrecensioner och berättelser för att visa upp din butiks nöjda kunder.</p>",
             "th": "<p>เพิ่มรีวิวและเสียงชื่นชมจากลูกค้าเพื่อนำเสนอลูกค้าที่ได้รับความพึงพอใจจากร้านค้า</p>",
             "zh-CN": "<p>添加客户评论和感言，以展示对您的商店满意的客户。</p>",
-            "zh-TW": "<p>加上顧客評論及推薦文，以便展示您商店的滿意顧客。</p>"
+            "zh-TW": "<p>新增顧客評論和推薦文，展示對您商店滿意之顧客。</p>"
           }
         },
         {
@@ -262,6 +260,9 @@
         "zh-TW": "文字"
       },
       "blocks": [
+        {
+          "type": "quote"
+        },
         {
           "type": "quote"
         },
